@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <noscript>
+        <p style="color: red;">JavaScript is disabled in your browser. Please enable JavaScript to use this form.</p>
+    </noscript>
+
+    <h1>Date Input Form</h1>
+    <form id="dateForm" action="submit-form.php" method="POST" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+        <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <script>
+        function validateForm() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const errorMessages = [];
+
+            if (!startDate) {
+                errorMessages.push('Start date is required.');
+            }
+
+            if (!endDate) {
+                errorMessages.push('End date is required.');
+            }
+
+            if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+                errorMessages.push('Start date cannot be later than end date.');
+            }
+
+            if (errorMessages.length > 0) {
+                alert(errorMessages.join('\n'));
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+</body>
+</html>
